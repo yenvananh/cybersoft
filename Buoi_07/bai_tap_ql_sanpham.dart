@@ -13,39 +13,51 @@ void main() {
 
 // Thêm sản phẩm vào danh sách
 themSanPham() {
-  print('');
+  print('\n-------------------------------------------');
+  print('|             THÊM SẢN PHẨM               |');
+  print('-------------------------------------------');
   String? stt, tenSanPham, giaTien, soLuong;
-  tenSanPham = nhapThongTin('Tên Sản phẩm');
+  tenSanPham = nhapThongTin('Tên sản phẩm');
   giaTien = nhapThongTin('Giá tiền');
   soLuong = nhapThongTin('Số lượng');
 
   stt = (danhSach.length + 1).toString();
   danhSach.add([stt, tenSanPham, giaTien, soLuong]);
-  print("\nThông tin của sản phẩm $tenSanPham đã được thêm thành công.");
+  print("\nThông tin sản phẩm \'$tenSanPham\' đã được thêm thành công.");
 }
 
 // Hiển thị danh sách sản phẩm
 hienDanhSach() {
-  print('\nDANH SÁCH SẢN PHẨM');
+  print('\n-------------------------------------------');
+  print('|           DANH SÁCH SẢN PHẨM            |');
+  print('-------------------------------------------');
 
-  inBangDuLieu(
-    headers: ['STT', 'Tên sản phẩm', 'Giá tiền', 'Số lượng'],
-    data: danhSach,
-    khoangCachCot: 3,
-  );
+  if (danhSach.length == 0) {
+    print(
+      'Thông báo: Danh sách Sản phẩm chưa có dữ liệu. Hãy thêm sản phẩm vào danh sách.',
+    );
+  } else {
+    inBangDuLieu(
+      headers: ['STT', 'Tên sản phẩm', 'Giá tiền', 'Số lượng'],
+      data: danhSach,
+      khoangCachCot: 4,
+    );
+  }
 
   hienMenu();
 }
 
 // Hiển thị sản phẩm điểm trung bình cao nhất
 timSanPham() {
+  print('\n-------------------------------------------');
+  print('|            TÌM KIẾM SẢN PHẨM            |');
+  print('-------------------------------------------');
   if (danhSach.length == 0) {
     print(
-      '\nThông báo: Danh sách Sản phẩm chưa có dữ liệu nên không thể tìm kiếm sản phẩm.',
+      'Thông báo: Danh sách Sản phẩm chưa có dữ liệu nên không thể tìm kiếm sản phẩm. Hãy thêm sản phẩm vào danh sách.',
     );
   } else {
-    print('');
-    var timSanPham = nhapThongTin('Tên Sản phẩm cần tìm');
+    var timSanPham = nhapThongTin('Tên sản phẩm cần tìm');
     var dsSanPhamTimThay = [];
 
     for (var sp in danhSach) {
@@ -54,42 +66,52 @@ timSanPham() {
       }
     }
 
-    print('\nDanh sách Sản phẩm tìm được là:');
+    print('\n-------------------------------------------');
+    print('|            KẾT QUẢ TÌM KIẾM             |');
+    print('-------------------------------------------');
 
-    inBangDuLieu(
-      headers: ['STT', 'Tên sản phẩm', 'Giá tiền', 'Số lượng'],
-      data: dsSanPhamTimThay,
-      khoangCachCot: 3,
-    );
+    if (dsSanPhamTimThay.length == 0) {
+      print('Thông báo: Không tìm thấy sản phẩm nào.');
+    } else {
+      inBangDuLieu(
+        headers: ['STT', 'Tên sản phẩm', 'Giá tiền', 'Số lượng'],
+        data: dsSanPhamTimThay,
+        khoangCachCot: 4,
+      );
+    }
   }
 
   hienMenu();
 }
 
 banSanPham() {
+  print('\n-------------------------------------------');
+  print('|              BÁN SẢN PHẨM               |');
+  print('-------------------------------------------');
   if (danhSach.length == 0) {
     print(
-      '\nThông báo: Danh sách Sản phẩm chưa có dữ liệu nên không thể bán sản phẩm.',
+      'Thông báo: Danh sách Sản phẩm chưa có dữ liệu nên không thể bán sản phẩm. Hãy thêm sản phẩm vào danh sách.',
     );
   } else {
-    print('');
-    var timSanPham = nhapThongTin('Tên Sản phẩm cần bán');
+    var timSanPham = nhapThongTin('tên Sản phẩm cần bán');
     var dsSanPhamCanBan = [];
 
     for (var sp in danhSach) {
       if (chuaNoiDung(timSanPham, sp[1])) {
         dsSanPhamCanBan.add(sp);
 
-        print('\nSản phẩm cần bán là:');
+        print('\n-------------------------------------------');
+        print('|       THÔNG TIN SẢN PHẨM CẦN BÁN        |');
+        print('-------------------------------------------');
 
         inBangDuLieu(
           headers: ['STT', 'Tên sản phẩm', 'Giá tiền', 'Số lượng'],
           data: dsSanPhamCanBan,
-          khoangCachCot: 3,
+          khoangCachCot: 4,
         );
 
         stdout.write(
-          '\nBạn thực sự muốn bán sản phẩm này? Nếu đúng nhấn [Y]. Nếu không nhấn [N]. Để quay về menu, nhấn nút bất kỳ rồi Enter.\n👉 Câu trả lời của bạn: ',
+          '\nBạn muốn bán sản phẩm \'${sp[1]}\' này? Nếu ĐÚNG nhấn [Y] để tiếp tục. Nếu SAI nhấn [N] để nhập lại tên sản phẩm cần bán.\nĐể quay về màn hình chính, nhấn nút bất kỳ rồi nhấn Enter.\n👉 Câu trả lời của bạn: ',
         );
 
         String? input = stdin.readLineSync();
@@ -102,22 +124,25 @@ banSanPham() {
             if (int.parse(soLuongSP) > 0) {
               var soLuongBan;
               do {
-                soLuongBan = nhapThongTin('Số lượng bán');
+                soLuongBan = nhapThongTin('Số lượng \'$tenSP\' cần bán');
                 if (int.parse(soLuongBan) > int.parse(soLuongSP)) {
                   print(
-                    '\nThông báo: Số lượng sản phẩm trong kho không đủ. Hãy nhập số lượng bán thấp hơn, tối đa là $soLuongSP.\n',
+                    '\nThông báo: Số lượng sản phẩm \'$tenSP\' trong kho không đủ. Hãy nhập số lượng bán thấp hơn, tối đa là $soLuongSP.\n',
                   );
                 } else {
                   // Cập nhật số lượng sản phẩm
-                  sp[3] =
+                  var soLuongCon =
                       (int.parse(soLuongSP) - int.parse(soLuongBan)).toString();
+                  sp[3] = soLuongCon;
                   print(
-                    'Thông báo: Đã bán $soLuongBan sản phẩm $tenSP. Còn lại ${sp[3]}.',
+                    'Thông báo: Đã bán $soLuongBan sản phẩm \'$tenSP\'. Số lượng \'$tenSP\' còn lại $soLuongCon.',
                   );
                 }
               } while (int.parse(soLuongBan) > int.parse(soLuongSP));
             } else {
-              print('\nThông báo: Sản phẩm đã hết nên không thể bán!');
+              print(
+                '\nThông báo: Sản phẩm \'$tenSP\' đã hết nên không thể bán!',
+              );
             }
 
             break;
@@ -151,7 +176,9 @@ String nhapThongTin(String thongtin) {
 
 // Hiển thị Menu
 hienMenu() {
-  print('\n========== MENU ==========');
+  print('\n===========================================');
+  print('|| PHẦN MỀM QUẢN LÝ SẢN PHẨM - CYPERSOFT ||');
+  print('===========================================');
   print(
     '[1] Thêm Sản phẩm. [2] Danh sách Sản phẩm. [3] Tìm kiếm Sản phẩm. [4] Bán Sản phẩm. [+] Thoát.',
   );
