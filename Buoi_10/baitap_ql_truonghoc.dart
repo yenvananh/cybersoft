@@ -146,7 +146,7 @@ hienMenu() {
     'QUẢN LÝ GIÁO VIÊN: [5] DS giáo viên  [6] Thêm giáo viên  [7] Xóa giáo viên  [8] Gán giáo viên vào lớp',
   );
   print(
-    'QUẢN LÝ HỌC SINH:  [9] DS sinh viên [10] Thêm sinh viên [11] Xóa sinh viên [12] Gán sinh viên vào lớp\n',
+    'QUẢN LÝ SINH VIÊN:  [9] DS sinh viên [10] Thêm sinh viên [11] Xóa sinh viên [12] Gán sinh viên vào lớp\n',
   );
 
   stdout.write('👉 Nhập lựa chọn của bạn: ');
